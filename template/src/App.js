@@ -25,7 +25,6 @@ import React, { Component, createContext } from 'react';
 //         <div>------------------------------ children2 <Children2 /></div>
 //     </AppContext.Provider>
 
-
 //     );
 //   }
 // }
@@ -58,30 +57,38 @@ class AppContainer extends Container {
 
 class App extends Component {
   render() {
-    return (<Provider>
-    <Subscribe to={[AppContainer]}>
-        {
-          container => {
-            return    <div> ------------------------------------------- Children1  {container.state.value} <Children1 /></div>
-          }
-        }
-    </Subscribe>
-   
-    </Provider>
+    return (
+      <Provider>
+        <Subscribe to={[AppContainer]}>
+          {container => {
+            return (
+              <div>
+                {' '}
+                ------------------------------------------- Children1{' '}
+                {container.state.value} <Children1 />
+              </div>
+            );
+          }}
+        </Subscribe>
+      </Provider>
     );
   }
 }
 class Children1 extends Component {
-
   render() {
-    return (<div>------------------------------------ children2 <Children2 /></div>)
+    return (
+      <div>
+        ------------------------------------ children2 <Children2 />
+      </div>
+    );
   }
 }
 class Children2 extends Component {
   render() {
     return (
-      <div>--------------------------------children 3<Children3 /></div>
-
+      <div>
+        --------------------------------children 3<Children3 />
+      </div>
     );
   }
 }
@@ -89,17 +96,21 @@ class Children3 extends Component {
   render() {
     return (
       <Subscribe to={[AppContainer]}>
-        {
-          container => {
-            return (<div> -------------- Value to component App : <input onChange={(e) => {
-              container.setState({ value: e.target.value })
-            }} />  
-            <Children4 /></div>)
-          }
-        }
+        {container => {
+          return (
+            <div>
+              {' '}
+              -------------- Value to component App :{' '}
+              <input
+                onChange={e => {
+                  container.setState({ value: e.target.value });
+                }}
+              />
+              <Children4 />
+            </div>
+          );
+        }}
       </Subscribe>
-
-
     );
   }
 }
@@ -107,14 +118,12 @@ class Children4 extends Component {
   render() {
     return (
       <Subscribe to={[AppContainer]}>
-        {
-          container => {
-            return (<div> -----------------Children 4 : {container.state.value} </div>)
-          }
-        }
+        {container => {
+          return (
+            <div> -----------------Children 4 : {container.state.value} </div>
+          );
+        }}
       </Subscribe>
-
-
     );
   }
 }
