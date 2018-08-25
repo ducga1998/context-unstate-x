@@ -2,56 +2,56 @@ import React, { Component, createContext } from 'react';
 
 //CONTEXT API REACT 16.3
 
-const AppContext = createContext()
-class Parent extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: ''
-    }
-  }
-  render() {
-    return (
-    <AppContext.Provider value={this.state.value}>
-      <div>--------------------------------------- Children1  <b>Change value</b> :
-        <input onChange={(e) => { this.setState({ value: e.target.value }) }} />
-        <Children1 />
-      </div>
-    </AppContext.Provider>
-    );
+// const AppContext = createContext()
+// class Parent extends Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       value: ''
+//     }
+//   }
+//   render() {
+//     return (
+//     <AppContext.Provider value={this.state.value}>
+//       <div>--------------------------------------- Children1<b>Change value</b> :
+//         <input onChange={(e) => { this.setState({ value: e.target.value }) }} />
+//         <Children1 />
+//       </div>
+//     </AppContext.Provider>
+//     );
 
-  }
-}
-class Children1 extends Component {
-  render() {
-    return (
-      <div> -------------------------------- Children1 <Children2 /></div>
-    );
-  }
-}
-class Children2 extends Component {
-  render() {
-    return (
-      <div> -------------------------- children 3 <Children3 /></div>
-    );
-  }
-}
-class Children3 extends Component {
-  render() {
-    return (
-      <AppContext.Consumer>
-        {
-          value => {
-            return (<div> -------------- Value to component App : {value} </div>)
-          }
-        }
-      </AppContext.Consumer>
+//   }
+// }
+// class Children1 extends Component {
+//   render() {
+//     return (
+//       <div> -------------------------------- Children1 <Children2 /></div>
+//     );
+//   }
+// }
+// class Children2 extends Component {
+//   render() {
+//     return (
+//       <div> -------------------------- children 3 <Children3 /></div>
+//     );
+//   }
+// }
+// class Children3 extends Component {
+//   render() {
+//     return (
+//       <AppContext.Consumer>
+//         {
+//           value => {
+//             return (<div> -------------- Value to component App : {value} </div>)
+//           }
+//         }
+//       </AppContext.Consumer>
 
-    );
-  }
-}
+//     );
+//   }
+// }
 
-export default Parent;
+// export default Parent;
 
 
 
@@ -128,73 +128,73 @@ export default Parent;
 //  UNSTATE-X
 
 
-// import { Provider, Container ,SubscribeOne } from 'unstated-x';
-// class AppContainer extends Container {
-//   state = { value: '' , foo  :  ':foo not update' };
-// }
+import { Provider, Container ,SubscribeOne } from 'unstated-x';
+class AppContainer extends Container {
+  state = { value: '' , foo  :  ':foo not update' };
+}
 
-// class Parent extends Component {
-//   render() {
-//     return (<Provider>
-//                 <div> ------------------------------------------- Children1 <Children1 /></div>
-//     </Provider>
-//     );
-//   }
-// }
-// class Children1 extends Component {
+class Parent extends Component {
+  render() {
+    return (<Provider>
+                <div> ------------------------------------------- Children1 <Children1 /></div>
+    </Provider>
+    );
+  }
+}
+class Children1 extends Component {
 
-//   render() {
-//     return <SubscribeOne to ={AppContainer} bind ={['foo']}>
-//       {
-//         container => {
-//           return (<div>------------------------------------ children2 <b>{container.state.foo}</b>  <Children2 /></div>)
-//         }
-//       }
-//     </SubscribeOne>
-//   }
-// }
-// class Children2 extends Component {
-//   render() {
-//     return (
-//       <div>--------------------------------children 3<Children3 /></div>
+  render() {
+    return <SubscribeOne to ={AppContainer} bind ={['foo']}>
+      {
+        container => {
+          return (<div>------------------------------------ children2 <b>{container.state.foo}</b>  <Children2 /></div>)
+        }
+      }
+    </SubscribeOne>
+  }
+}
+class Children2 extends Component {
+  render() {
+    return (
+      <div>--------------------------------children 3<Children3 /></div>
 
-//     );
-//   }
-// }
-// class Children3 extends Component {
-//   render() {
-//     return (
-//       <SubscribeOne to={AppContainer} bind ={['value']}>
-//         {
-//           container => {
-//             return (<div> -------------- Value to component App : <input onChange={(e) => {
-//               container.setState({ value: e.target.value })
-//             }} />  
-//             <Children4 /></div>)
-//           }
-//         }
-//       </SubscribeOne>
-//     );
-//   }
-// }
-// class Children4 extends Component {
-//   render() {
-//   return   <SubscribeOne to={AppContainer} bind ={['value']}>
-//      {
-//        container => {
-//         return (<div> -----------------Children 4 {container.state.value} </div>)
-//        }
-//      }
-//    </SubscribeOne>
-//       //     }
-//       //   }
-//       // </SubscribeOne>
+    );
+  }
+}
+class Children3 extends Component {
+  render() {
+    return (
+      <SubscribeOne to={AppContainer} bind ={['value']}>
+        {
+          container => {
+            return (<div> -------------- Value to component App : <input onChange={(e) => {
+              container.setState({ value: e.target.value })
+            }} />  
+            <Children4 /></div>)
+          }
+        }
+      </SubscribeOne>
+    );
+  }
+}
+class Children4 extends Component {
+  render() {
+  return   <SubscribeOne to={AppContainer} bind ={['value']}>
+     {
+       container => {
+        return (<div> -----------------Children 4 {container.state.value} </div>)
+       }
+     }
+   </SubscribeOne>
+      //     }
+      //   }
+      // </SubscribeOne>
 
 
 
-//   }
-// }
-// export default Parent;
+  }
+}
+export default Parent;
 
 
 
@@ -215,7 +215,7 @@ export default Parent;
 // class Parent extends Component {
 //   render() {
 //     return <Provider>
-//       <CombineContext.Provider value={CombineContainer1}>
+//       <CombineContext.Provider value={CombineContainer2}>
 //      ----------------------------------------- Children1 <Children1 />
 //     </CombineContext.Provider>
 //     </Provider>
